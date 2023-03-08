@@ -1,0 +1,19 @@
+.container {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+  }
+  
+  form {
+    display: inline-block;
+    text-align: left;
+  }
+  
+  label, input {
+    display: block;
+  }
+  
+  .result {
+    margin-top: 20px;
+    white-space: pre-line;
+  }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CURL API Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('form').on('submit', function(event) {
+          event.preventDefault(); // Prevent the form from submitting automatically
+          var formData = $(this).serialize(); // Serialize the form data
+          $.ajax({
+            type: 'POST',
+            url: 'api/submit.php',
+            data: formData,
+            success: function(response) {
+              // Replace "\n" characters with "<br>" tags
+              var formattedText = JSON.parse(response).run.results[0][0]["value"]["completion"]["text"].replace(/\n/g, "<br>");
+              $('#result').html(formattedText); // Update an element with ID "result" with the response
+            },
+            error: function(xhr, status, error) {
+              console.log('Error:', error); // Log any errors
+              alert('An error occurred while submitting the form. Please try again later.');
+            },
+            complete: function(xhr, status) {
+              console.log('AJAX request complete.');
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Email Generator</h1>
+      <form method="POST">
+        <label for="company_name">Company Name:</label>
+        <input type="text" name="company_name" id="company_name"><br><br>
+
+        <label for="url">URL:</label>
+        <input type="text" name="url" id="url"><br><br>
+
+        <label for="your_name">Your Name:</label>
+        <input type="text" name="your_name" id="your_name"><br><br>
+
+        <input type="submit" value="Submit">
+      </form>
+      
+      <div class="result" id="result"></div> <!-- Result will be displayed here -->
+    </div>
+  </body>
+</html>

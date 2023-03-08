@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/submit.php": {
+      "runtime": "now-php@0.0.7"
+    }
+  }
+}
